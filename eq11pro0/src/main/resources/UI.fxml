@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.udes.controlleurs.Controller">
    <top>
       <VBox prefHeight="705.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
@@ -50,7 +50,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-plus-26.png" />
+                                                <Image url="images/icons8-plus-26.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -65,7 +65,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-plein-écran-50.png" />
+                                                <Image url="images/icons8-plein-écran-50.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -99,7 +99,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-crayon-24.png" />
+                                                <Image url="images/icons8-crayon-24.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -114,7 +114,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-agrandir-30.png" />
+                                                <Image url="images/icons8-agrandir-30.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -132,7 +132,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-gomme-30.png" />
+                                                <Image url="images/icons8-gomme-30.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -150,7 +150,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-info-30.png" />
+                                                <Image url="images/icons8-info-30.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -168,7 +168,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/icons8-image-entière-30.png" />
+                                                <Image url="images/icons8-image-entière-30.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -214,7 +214,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/align-left-1859485-1577881.png" />
+                                                <Image url="images/align-left-1859485-1577881.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -229,7 +229,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/unnamed.png" />
+                                                <Image url="images/unnamed.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
@@ -260,7 +260,7 @@
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../images/flip-horizontal-2403565-2010157.png" />
+                                                <Image url="images/flip-horizontal-2403565-2010157.png" />
                                              </image>
                                              <rotationAxis>
                                                 <Point3D />
