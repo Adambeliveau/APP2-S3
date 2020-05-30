@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -34,7 +35,7 @@
               <tabs>
                 <Tab fx:id="EditorTab" text="Editor">
                      <content>
-                        <VBox prefHeight="661.0" prefWidth="1000.0">
+                        <VBox prefHeight="632.0" prefWidth="1099.0">
                            <children>
                               <HBox prefHeight="32.0" prefWidth="584.0">
                                  <children>
@@ -182,7 +183,7 @@
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <MenuButton fx:id="MenuArrow" mnemonicParsing="false" onAction="#menuArrowAction" text="Arrow">
+                                    <MenuButton fx:id="MenuArrow" mnemonicParsing="false" onAction="#menuArrowAction" prefHeight="30.0" prefWidth="90.0" text="Arrow">
                                       <items>
                                         <MenuItem fx:id="SimpleArrowbtn" mnemonicParsing="false" onAction="#simpleArrowAction" text="simple" />
                                         <MenuItem fx:id="DoubleArrowbtn" mnemonicParsing="false" text="double" />
@@ -273,31 +274,265 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="610.0" prefWidth="1000.0">
+                              <HBox prefHeight="601.0" prefWidth="986.0">
                                  <children>
-                                    <Accordion fx:id="Accordion" prefHeight="297.0" prefWidth="850.0">
+                                    <Accordion fx:id="Accordion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="320.0">
                                       <panes>
                                         <TitledPane fx:id="InversionbasedTab" animated="false" text="Inversion-based models">
                                              <content>
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="DirectInvDisturbancebtn" layoutX="14.0" layoutY="71.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#directInvDisturbanceAction" prefHeight="50.0" text="Direct inversion disturbance">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/directinversiondisturbance.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="DirectInvbtn" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#directInvAction" prefHeight="50.0" text="Direct inversion">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/directinversion.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="IndirectInvbtn" layoutX="14.0" layoutY="128.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#indirectInvAction" prefHeight="50.0" text="Indirect inversion">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/indirctinverison.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="CouplingInvWeightingbtn" layoutX="13.0" layoutY="188.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#couplingInvWeightingAction" prefHeight="50.0" text="Coupling inversion weighting">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/couplinginversionwieghting.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="CouplingInvDistributionbtn" layoutX="13.0" layoutY="244.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#couplingInvDistributionAction" prefHeight="50.0" text="Coupling inversion distribution">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/couplinginversiondistribution.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children></AnchorPane>
                                              </content></TitledPane>
                                           <TitledPane fx:id="StrategybasedTab" animated="false" text="Strategy models">
                                             <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="Strategybtn" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#strategyAction" prefHeight="50.0" text="Strategy">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/strategy.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children></AnchorPane>
                                             </content>
                                           </TitledPane>
                                           <TitledPane fx:id="EstimatorTab" animated="false" text="Estimator models">
                                             <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                <ScrollPane prefViewportHeight="476.0" prefViewportWidth="321.0">
+                                                   <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="790.0" prefWidth="307.0">
+                                                         <children>
+                                                            <Button fx:id="EstimatorMultiCoupbtn" layoutX="24.0" layoutY="304.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorMultiCoupAction" prefHeight="50.0" text="Multi-physical coupling">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@images/couplingCercle.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorMonoCoupbtn" layoutX="23.0" layoutY="248.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorMonoCoupAction" prefHeight="50.0" text="Mono-physical coupling">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/couplingCarree.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorMultiConvbtn" layoutX="23.0" layoutY="192.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorMultiConvAction" prefHeight="50.0" text="Multi-physical converter">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/ConversionCercle.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorMonoConvbtn" layoutX="24.0" layoutY="136.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorMonoConvAction" prefHeight="50.0" text="Mono-physical converter">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/ConversionCarre.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorEnergySourcebtn" layoutX="24.0" layoutY="24.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorEnergySourceAction" prefHeight="50.0" text="Energy source">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/EnergySource.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorAccumulateurbtn" layoutX="24.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorAccumulateurAction" prefHeight="50.0" text="Accumulateur">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/Accumulation.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorStrategybtn" layoutX="24.0" layoutY="360.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorstrategyAction" prefHeight="50.0" text="Strategy">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/strategy.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorCoupInvDistbtn" layoutX="23.0" layoutY="650.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorCoupInvDistAction" prefHeight="50.0" text="Coupling inversion distribution">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/couplinginversiondistribution.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorCoupInvWeigbtn" layoutX="23.0" layoutY="590.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorCoupInvWeigthAction" prefHeight="50.0" text="Coupling inversion weighting">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/couplinginversionwieghting.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorIndirectInvbtn" layoutX="24.0" layoutY="530.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorIndirectInvAction" prefHeight="50.0" text="Indirect inversion">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/indirctinverison.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorDirectInvbtn" layoutX="22.0" layoutY="416.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorDrectInvAction" prefHeight="50.0" text="Direct inversion">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/directinversion.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button fx:id="EstimatorDirectInvDisbtn" layoutX="22.0" layoutY="470.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#estimatorDirectInvDisAction" prefHeight="50.0" text="Direct inversion disturbance">
+                                                               <graphic>
+                                                                  <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="images/directinversiondisturbance.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </ScrollPane>
                                             </content>
                                           </TitledPane>
-                                        <TitledPane fx:id="EnergyBasedTab" animated="false" prefHeight="405.0" prefWidth="52.0" text="Energy-based models">
+                                        <TitledPane fx:id="EnergyBasedTab" animated="false" prefHeight="505.0" prefWidth="491.0" text="Energy-based models">
                                              <content>
-                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="Accumulateurbtn" layoutX="34.0" layoutY="90.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#AccumulateurAction" prefHeight="50.0" text="Accumulateur">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/Accumulation.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="EnergySourcebtn" layoutX="34.0" layoutY="34.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#energySourceAction" prefHeight="50.0" text="Energy source">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/EnergySource.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="MonoConvbtn" layoutX="34.0" layoutY="146.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#monoConvAction" prefHeight="50.0" text="Mono-physical converter">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/ConversionCarre.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="MultiConvbtn" layoutX="33.0" layoutY="202.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#multiConvAction" prefHeight="50.0" text="Multi-physical converter">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/ConversionCercle.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="MonoCoupbtn" layoutX="33.0" layoutY="258.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#monoCoupAction" prefHeight="50.0" text="Mono-physical coupling">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/couplingCarree.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button fx:id="MultiCoupbtn" layoutX="34.0" layoutY="314.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#multiCoupAction" prefHeight="50.0" text="Multi-physical coupling">
+                                                         <graphic>
+                                                            <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="images/couplingCercle.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </AnchorPane>
                                              </content></TitledPane>
                                       </panes>
                                     </Accordion>
-                                    <AnchorPane prefHeight="498.0" prefWidth="1296.0" />
+                                    <Canvas fx:id="Canvas" height="600.0" width="674.0">
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" left="1.0" right="1.0" />
+                                       </HBox.margin>
+                                    </Canvas>
                                  </children>
                               </HBox>
                            </children>
