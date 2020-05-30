@@ -1,7 +1,6 @@
 package application;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -30,8 +29,8 @@ public class EMR extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(EMR.class.getResource("factoryUI.fxml"));
-            System.out.println(EMR.class.getResource("factoryUI.fxml"));
+            loader.setLocation(EMR.class.getResource("/UI.fxml"));
+            System.out.println(EMR.class.getResource("/UI.fxml"));
             rootLayout = (BorderPane) loader.load();
             
             // Show the scene containing the root layout.
