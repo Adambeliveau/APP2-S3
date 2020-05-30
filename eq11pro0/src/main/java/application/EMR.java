@@ -16,7 +16,7 @@ public class EMR extends Application {
 	public void start(Stage primaryStage) {
 		
 		this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Labo");
+        this.primaryStage.setTitle("EMR");
         this.primaryStage.show();
         initRootLayout();
 
@@ -30,7 +30,6 @@ public class EMR extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(EMR.class.getResource("/UI.fxml"));
-            System.out.println(EMR.class.getResource("/UI.fxml"));
             rootLayout = (BorderPane) loader.load();
             
             // Show the scene containing the root layout.
