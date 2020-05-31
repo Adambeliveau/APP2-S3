@@ -186,14 +186,14 @@
                                     <MenuButton fx:id="MenuArrow" mnemonicParsing="false" onAction="#menuArrowAction" prefHeight="30.0" prefWidth="90.0" text="Arrow">
                                       <items>
                                         <MenuItem fx:id="SimpleArrowbtn" mnemonicParsing="false" onAction="#simpleArrowAction" text="simple" />
-                                        <MenuItem fx:id="DoubleArrowbtn" mnemonicParsing="false" text="double" />
-                                          <MenuItem fx:id="FullArrowbtn" mnemonicParsing="false" onAction="#fullArrowAction" text="Full" />
+                                        <MenuItem fx:id="DoubleArrowbtn" mnemonicParsing="false" onAction="#doubleArrowAction" text="double" />
+                                          <MenuItem fx:id="DashedArrowbtn" mnemonicParsing="false" onAction="#dashedArrowAction" text="Dashed" />
                                       </items>
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </MenuButton>
-                                    <ImageView fitHeight="30.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="ArrowImg" fitHeight="30.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
@@ -274,9 +274,9 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="601.0" prefWidth="986.0">
+                              <HBox prefHeight="568.0" prefWidth="1000.0">
                                  <children>
-                                    <Accordion fx:id="Accordion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="320.0">
+                                    <Accordion fx:id="Accordion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="320.0">
                                       <panes>
                                         <TitledPane fx:id="InversionbasedTab" animated="false" text="Inversion-based models">
                                              <content>
@@ -291,7 +291,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button fx:id="DirectInvbtn" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#directInvAction" prefHeight="50.0" text="Direct inversion">
+                                                      <Button fx:id="DirectInvbtn" layoutX="14.0" layoutY="14.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#directInvAction" onDragDetected="#detectDrag" prefHeight="50.0" text="Direct inversion">
                                                          <graphic>
                                                             <ImageView fitHeight="50.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -528,11 +528,7 @@
                                              </content></TitledPane>
                                       </panes>
                                     </Accordion>
-                                    <Canvas fx:id="Canvas" height="600.0" width="674.0">
-                                       <HBox.margin>
-                                          <Insets bottom="1.0" left="1.0" right="1.0" />
-                                       </HBox.margin>
-                                    </Canvas>
+                                    <AnchorPane fx:id="anchorPane" onDragDropped="#dragDropped" onDragOver="#draggedOver" prefHeight="576.0" prefWidth="680.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -545,4 +541,11 @@
          </children>
       </VBox>
    </top>
+   <bottom>
+      <Label fx:id="StatusBarL" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </bottom>
 </BorderPane>
