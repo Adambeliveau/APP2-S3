@@ -1,12 +1,16 @@
 package ca.udes.model;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+
 public class Parallelogramme extends Shape{
 	
-	private int Points[];
-	Parallelogramme(String attributes){
-		this.attributes = attributes;
+	private int[] Points;
+	Color red = Color.rgb(255,0,0);
+	Parallelogramme(String Type) {
+		super(Type);
+		this.AttributesParser();
 	}
-	
 	public void AttributesParser() {
 		int cpt = 0;
 	
@@ -28,4 +32,19 @@ public class Parallelogramme extends Shape{
 		}
 		System.out.println(this.attributesParsed);
 	}	
+	public Polygon setArgs() {
+		Polygon p = new Polygon(
+					Points[0],
+					Points[1],
+					Points[2],
+					Points[3],
+					Points[4],
+					Points[5],
+					Points[6],
+					Points[7]
+				);
+		p.setFill(Color.web(this.attributesParsed[1].substring(4)));
+		p.setStroke(Color.web(this.attributesParsed[2].substring(7)));
+		return p;
+	}
 }
