@@ -21,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Path;
@@ -229,12 +228,15 @@ public class Controller {
     @FXML
     void drawAction(ActionEvent event) {
     	this.StatusBarL.setText("Draw");
-    	if(isDraw == 1) {
+    	if(isDraw == 1 && Drawbtn.isArmed() == true) {
     		isDraw = 0;
+    		System.out.println("0");
     	}
-    	if(isDraw == 0){
+    	if(isDraw == 0 || Drawbtn.isFocused() == false){
     		isDraw = 1;
+    		System.out.println("1");
     	}
+    	
     	
     }
 
@@ -304,26 +306,21 @@ public class Controller {
     	ClipboardContent clipboardContent = new ClipboardContent(); 
     	clipboardContent.putString("Item copied to clipboard"); 
     	dragboard.setContent(clipboardContent);
-    	System.out.println(dragboard.getContentTypes());
-//    	event.consume(); 
+    	System.out.println(dragboard.getContentTypes()); 
     }
    
     @FXML
     void draggedOver(DragEvent event) { 
     	event.acceptTransferModes(TransferMode.ANY); 
     	System.out.println("Dragged over!");
-//    	event.consume(); 
     } 
 
-    // Event on drag Drop on Anchor Pane
     @FXML
     void dragDropped(DragEvent event) {
     	System.out.println(ConversionInv.toString());
-    	System.out.println(ConversionInv.getPoints());
+    	
     	
     	ObservableList<Double> polygonePoints = ConversionInv.getPoints();
-    	System.out.println(polygonePoints.get(1).doubleValue());
-    	
     	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
     			polygonePoints.get(1).doubleValue(),
     			polygonePoints.get(2).doubleValue(),
@@ -339,7 +336,14 @@ public class Controller {
     	newPoly.setLayoutY(event.getY());
     	
     	anchorPane.getChildren().add(newPoly);
-//    	event.consume();
+    }
+    
+    @FXML
+    void LineCreator(DragEvent event) {
+    	if(isDraw == 1) {
+    		
+    	}
+    	
     }
     
     @FXML
