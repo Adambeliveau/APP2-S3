@@ -1,5 +1,9 @@
 package ca.udes.controlleurs;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -214,6 +218,55 @@ public class Controller {
     
     @FXML
     private int isDraw;
+    
+    @FXML
+    private MenuItem Undo;
+    
+    @FXML
+    private MenuItem Redo;
+    
+    private List<Double> x = new ArrayList<Double>();
+    
+    private List<Double> y = new ArrayList<Double>();
+    
+    private int cptRedo = 0;
+    
+    @FXML
+    void UndoAction(ActionEvent event) {
+    	
+    	if(cpt > 0) {
+    		x.add(anchorPane.getChildren().get(--cpt).getLayoutX());
+        	y.add(anchorPane.getChildren().get(cpt).getLayoutY());
+    		anchorPane.getChildren().remove(cpt);
+    		cptRedo++;
+    	}
+    	System.out.println(cptRedo);
+    	System.out.println(cpt);
+    }
+    
+    @FXML
+    void RedoAction(ActionEvent event) {
+    	if(cptRedo > 0 ) {
+    		ObservableList<Double> polygonePoints = ConversionInv.getPoints();
+        	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
+        			polygonePoints.get(1).doubleValue(),
+        			polygonePoints.get(2).doubleValue(),
+        			polygonePoints.get(3).doubleValue(),
+        			polygonePoints.get(4).doubleValue(),
+        			polygonePoints.get(5).doubleValue(),
+        			polygonePoints.get(6).doubleValue(),
+        			polygonePoints.get(7).doubleValue()
+        			);
+        	newPoly.setFill(ConversionInv.getFill());
+        	newPoly.setStroke(ConversionInv.getStroke());
+        	newPoly.setLayoutX(x.get(--cptRedo));
+        	newPoly.setLayoutY(y.get(cptRedo));
+        	anchorPane.getChildren().add(newPoly);
+        	cpt++;
+    	}
+    	System.out.println(cptRedo);
+    	System.out.println(cpt);
+    }
 
     @FXML
     void addAction(ActionEvent event) {
@@ -236,8 +289,7 @@ public class Controller {
     		isDraw = 1;
     		System.out.println("1");
     	}
-    	
-    	
+
     }
 
     @FXML
@@ -297,6 +349,7 @@ public class Controller {
     @FXML
     void InversionAction(ActionEvent event) {
     	this.StatusBarL.setText("Inverse a pictogram");
+    	
     }
 
     @FXML
@@ -314,11 +367,11 @@ public class Controller {
     	event.acceptTransferModes(TransferMode.ANY); 
     	System.out.println("Dragged over!");
     } 
-
+    
+    private int cpt = 0;
+    
     @FXML
     void dragDropped(DragEvent event) {
-    	System.out.println(ConversionInv.toString());
-    	
     	
     	ObservableList<Double> polygonePoints = ConversionInv.getPoints();
     	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
@@ -334,8 +387,11 @@ public class Controller {
     	newPoly.setStroke(ConversionInv.getStroke());
     	newPoly.setLayoutX(event.getX());
     	newPoly.setLayoutY(event.getY());
+    	newPoly.setId(Integer.toString(cpt++));
     	
     	anchorPane.getChildren().add(newPoly);
+    	System.out.println(cptRedo);
+    	System.out.println(cpt);
     }
     
     @FXML
@@ -367,10 +423,12 @@ public class Controller {
         assert MultiConvMid != null : "fx:id=\"MultiConvMid\" was not injected: check your FXML file 'UI.fxml'.";
         assert MonoConv != null : "fx:id=\"MonoConv\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorLineAccumulator != null : "fx:id=\"EstimatorLineAccumulator\" was not injected: check your FXML file 'UI.fxml'.";
+        assert Undo != null : "fx:id=\"Undo\" was not injected: check your FXML file 'UI.fxml'.";
         assert DashedArrowbtn != null : "fx:id=\"DashedArrowbtn\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorMultiConv != null : "fx:id=\"EstimatorMultiConv\" was not injected: check your FXML file 'UI.fxml'.";
         assert Picturebtn != null : "fx:id=\"Picturebtn\" was not injected: check your FXML file 'UI.fxml'.";
         assert MonoCoupTop != null : "fx:id=\"MonoCoupTop\" was not injected: check your FXML file 'UI.fxml'.";
+        assert Redo != null : "fx:id=\"Redo\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorAccumulator != null : "fx:id=\"EstimatorAccumulator\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorEnergySource != null : "fx:id=\"EstimatorEnergySource\" was not injected: check your FXML file 'UI.fxml'.";
         assert File != null : "fx:id=\"File\" was not injected: check your FXML file 'UI.fxml'.";

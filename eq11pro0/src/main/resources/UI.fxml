@@ -19,6 +19,8 @@
                 <Menu fx:id="File" mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem fx:id="Undo" mnemonicParsing="false" onAction="#UndoAction" text="Undo" />
+                        <MenuItem fx:id="Redo" mnemonicParsing="false" onAction="#RedoAction" text="Redo" />
                   </items>
                 </Menu>
                 <Menu fx:id="Edit" mnemonicParsing="false" text="Edit">
@@ -419,7 +421,7 @@
                                              </content></TitledPane>
                                       </panes>
                                     </Accordion>
-                                    <AnchorPane fx:id="anchorPane" onDragDropped="#dragDropped" onDragOver="#draggedOver" prefHeight="576.0" prefWidth="680.0" />
+                                    <AnchorPane fx:id="anchorPane" onDragDropped="#dragDropped" onDragOver="#draggedOver" onMouseDragged="#LineCreator" prefHeight="576.0" prefWidth="680.0" />
                                  </children>
                               </HBox>
                            </children>
