@@ -6,28 +6,23 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
-public class Polygone extends ShapeParent{
+public class Polygone extends Polygon{
 
 	private List<String> Attributes= new ArrayList<String>();
 	private List<Double> Points = new ArrayList<Double>();
-	private Polygon p;
+	private String toString = "";
 	
 	Polygone(String toString) {
-		super(toString);
+		
+		this.toString = toString;
+		
 		splitToString();
-		p = new Polygon(
-				Points.get(0),
-				Points.get(1),
-				Points.get(2),
-				Points.get(3),
-				Points.get(4),
-				Points.get(5),
-				Points.get(6),
-				Points.get(7)
-				);
+		
+		this.getPoints().addAll(Points);
 		System.out.println(Attributes.get(1).substring(Attributes.get(1).indexOf("=") + 1));
-		p.setFill(Color.web(Attributes.get(1).substring(Attributes.get(1).indexOf("=") + 1)));
-		p.setStroke(Color.web(Attributes.get(2).substring(Attributes.get(2).indexOf("=") + 1)));
+		this.setFill(Color.web(Attributes.get(1).substring(Attributes.get(1).indexOf("=") + 1)));
+		this.setStroke(Color.web(Attributes.get(2).substring(Attributes.get(2).indexOf("=") + 1)));
+		
 	}
 	
 	public void splitToString() {
@@ -51,11 +46,11 @@ public class Polygone extends ShapeParent{
 				this.toString = this.toString.replace(" points=[" + toDelete + "],", "");
 			}
 			if(j != 3) {
-				Attributes.add(this.toString.substring(0, this.getToString().indexOf(",") ));
+				Attributes.add(this.toString.substring(0, this.toString.indexOf(",") ));
 				this.toString = this.toString.replace(Attributes.get(cpt) + ",", "");
 			}
 			else if(j == 3) {
-				Attributes.add(this.toString.substring(0, this.getToString().indexOf("]") ));
+				Attributes.add(this.toString.substring(0, this.toString.indexOf("]") ));
 			}
 			
 			
@@ -63,6 +58,6 @@ public class Polygone extends ShapeParent{
 		}
 	}
 	
-	public void x(Double x) {p.setLayoutX(x);}
-	public void y(Double y) {p.setLayoutY(y);}
+	public void x(Double x) {this.setLayoutX(x);}
+	public void y(Double y) {this.setLayoutY(y);}
 }

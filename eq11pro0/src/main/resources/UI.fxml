@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.udes.controlleurs.Controller">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#SaveS" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.udes.controlleurs.Controller">
    <top>
       <VBox prefHeight="705.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,8 +19,8 @@
                 <Menu fx:id="File" mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem fx:id="Undo" mnemonicParsing="false" onAction="#UndoAction" text="Undo" />
-                        <MenuItem fx:id="Redo" mnemonicParsing="false" onAction="#RedoAction" text="Redo" />
+                        <MenuItem fx:id="Save" mnemonicParsing="false" onAction="#SaveAction" text="Save" />
+                        <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#OpenAction" text="Open" />
                   </items>
                 </Menu>
                 <Menu fx:id="Edit" mnemonicParsing="false" text="Edit">
@@ -197,7 +197,7 @@
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </MenuButton>
-                                    <ImageView fx:id="ArrowImg" fitHeight="30.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="ArrowImg" fitHeight="30.0" fitWidth="109.0" onDragDetected="#detectDragArrow" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>

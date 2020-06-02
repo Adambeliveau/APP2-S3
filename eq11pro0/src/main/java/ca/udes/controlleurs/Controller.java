@@ -1,10 +1,14 @@
 package ca.udes.controlleurs;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.udes.model.Command;
+import ca.udes.model.CommandControl;
 import ca.udes.model.ShapeFactory;
-import ca.udes.model.ShapeParent;
+//import ca.udes.model.ShapeParent;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +26,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +37,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.Node;
 
 public class Controller {
 
@@ -221,52 +228,58 @@ public class Controller {
     private int isDraw;
     
     @FXML
-    private MenuItem Undo;
+    private MenuItem Open;
     
     @FXML
-    private MenuItem Redo;
+    private MenuItem Save;
     
-    private List<Double> x = new ArrayList<Double>();
+    private ShapeFactory shFact = new ShapeFactory();
     
-    private List<Double> y = new ArrayList<Double>();
+    private int cpt = 0;
     
-    private int cptRedo = 0;
+    private String idCopiedObj = "";
     
-    @FXML
-    void UndoAction(ActionEvent event) {
+    
+    private void copyClipboard(MouseEvent event, Node n) {
+    	System.out.println("Drag detected!");
     	
-    	if(cpt > 0) {
-    		x.add(anchorPane.getChildren().get(--cpt).getLayoutX());
-        	y.add(anchorPane.getChildren().get(cpt).getLayoutY());
-    		anchorPane.getChildren().remove(cpt);
-    		cptRedo++;
-    	}
-    	System.out.println(cptRedo);
-    	System.out.println(cpt);
+    	idCopiedObj = n.getId();
+    	
+    	Dragboard dragboard = n.startDragAndDrop(TransferMode.ANY); 
+    	ClipboardContent clipboardContent = new ClipboardContent(); 
+    	clipboardContent.putString("Item copied to clipboard"); 
+    	dragboard.setContent(clipboardContent);
+    	
+    	System.out.println(dragboard.getContentTypes());
+    	event.consume(); 
+    }
+    
+    private CommandControl cc = new CommandControl();
+    protected List<Double> x = new ArrayList<Double>();
+	protected List<Double> y = new ArrayList<Double>();    
+	protected List<String> id = new ArrayList<String>();
+    
+    @FXML
+    void SaveAction(ActionEvent event) throws IOException {
+
+    	cc.getCommand("Save", anchorPane, cpt, BorderPane, shFact, x, y, id);
     }
     
     @FXML
-    void RedoAction(ActionEvent event) {
-    	if(cptRedo > 0 ) {
-    		ObservableList<Double> polygonePoints = ConversionInv.getPoints();
-        	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
-        			polygonePoints.get(1).doubleValue(),
-        			polygonePoints.get(2).doubleValue(),
-        			polygonePoints.get(3).doubleValue(),
-        			polygonePoints.get(4).doubleValue(),
-        			polygonePoints.get(5).doubleValue(),
-        			polygonePoints.get(6).doubleValue(),
-        			polygonePoints.get(7).doubleValue()
-        			);
-        	newPoly.setFill(ConversionInv.getFill());
-        	newPoly.setStroke(ConversionInv.getStroke());
-        	newPoly.setLayoutX(x.get(--cptRedo));
-        	newPoly.setLayoutY(y.get(cptRedo));
-        	anchorPane.getChildren().add(newPoly);
-        	cpt++;
+    void OpenAction(ActionEvent event) throws IOException {
+    	cc.getCommand("Open", anchorPane, cpt, BorderPane, shFact, x, y, id);
+    	anchorPane = cc.getAnchorPane();
+
+    }
+    
+    @FXML
+    void SaveS(KeyEvent event) throws IOException {
+    	if(event.getCode() == KeyCode.Z) {
+    		
+        	cc.getCommand("Undo", anchorPane, cpt, BorderPane, shFact, x, y, id);
+
     	}
-    	System.out.println(cptRedo);
-    	System.out.println(cpt);
+
     }
 
     @FXML
@@ -282,14 +295,6 @@ public class Controller {
     @FXML
     void drawAction(ActionEvent event) {
     	this.StatusBarL.setText("Draw");
-    	if(isDraw == 1 && Drawbtn.isArmed() == true) {
-    		isDraw = 0;
-    		System.out.println("0");
-    	}
-    	if(isDraw == 0 || Drawbtn.isFocused() == false){
-    		isDraw = 1;
-    		System.out.println("1");
-    	}
 
     }
 
@@ -355,54 +360,38 @@ public class Controller {
 
     @FXML
     void detectDrag(MouseEvent event) {
-    	System.out.println("Drag detected!");
-    	Dragboard dragboard = ConversionInv.startDragAndDrop(TransferMode.ANY); 
-    	ClipboardContent clipboardContent = new ClipboardContent(); 
-    	clipboardContent.putString("Item copied to clipboard"); 
-    	dragboard.setContent(clipboardContent);
-    	System.out.println(dragboard.getContentTypes()); 
+    	copyClipboard(event, ConversionInv);
+    }
+    @FXML
+    void detectDragArrow(MouseEvent event) {
+    	copyClipboard(event, ArrowImg);
     }
    
     @FXML
     void draggedOver(DragEvent event) { 
     	event.acceptTransferModes(TransferMode.ANY); 
     	System.out.println("Dragged over!");
+    	System.out.println(idCopiedObj);
+    	event.consume();
     } 
     
-    private int cpt = 0;
     
-    private ShapeFactory shapeFactory = new ShapeFactory();
+    
     @FXML
     void dragDropped(DragEvent event) {
-    	System.out.println(ConversionInv.toString());
-    	System.out.println(MultiConv.toString());
-    	System.out.println(MonoConv.toString());
-    	System.out.println(EnergySource.toString());
+    	System.out.println("Drooooped");
+    	Node newNode = null;
+    	Node node = BorderPane.lookup("#"+idCopiedObj);
+    	String nodeString = node.toString();
+    	System.out.println(nodeString);
     	
-    	
-    	ShapeParent newShape = shapeFactory.getShape(ConversionInv.toString().substring(0,ConversionInv.toString().indexOf("["))
-    			, ConversionInv.toString());
-    	newShape.x(event.getX());
-    	newShape.y(event.getY());
-//    	ObservableList<Double> polygonePoints = ConversionInv.getPoints();
-//    	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
-//    			polygonePoints.get(1).doubleValue(),
-//    			polygonePoints.get(2).doubleValue(),
-//    			polygonePoints.get(3).doubleValue(),
-//    			polygonePoints.get(4).doubleValue(),
-//    			polygonePoints.get(5).doubleValue(),
-//    			polygonePoints.get(6).doubleValue(),
-//    			polygonePoints.get(7).doubleValue()
-//    			);
-//    	newPoly.setFill(ConversionInv.getFill());
-//    	newPoly.setStroke(ConversionInv.getStroke());
-//    	newPoly.setLayoutX(event.getX());
-//    	newPoly.setLayoutY(event.getY());
-//    	newPoly.setId(Integer.toString(cpt++));
-    	
-    	anchorPane.getChildren().add(newShape);
-    	System.out.println(cptRedo);
+
+    	newNode = shFact.getShape(nodeString, event.getX(), event.getY(), idCopiedObj);
+
+    	cpt++;
     	System.out.println(cpt);
+    	anchorPane.getChildren().add(newNode);
+
     }
     
     @FXML
@@ -434,13 +423,12 @@ public class Controller {
         assert MultiConvMid != null : "fx:id=\"MultiConvMid\" was not injected: check your FXML file 'UI.fxml'.";
         assert MonoConv != null : "fx:id=\"MonoConv\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorLineAccumulator != null : "fx:id=\"EstimatorLineAccumulator\" was not injected: check your FXML file 'UI.fxml'.";
-        assert Undo != null : "fx:id=\"Undo\" was not injected: check your FXML file 'UI.fxml'.";
         assert DashedArrowbtn != null : "fx:id=\"DashedArrowbtn\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorMultiConv != null : "fx:id=\"EstimatorMultiConv\" was not injected: check your FXML file 'UI.fxml'.";
         assert Picturebtn != null : "fx:id=\"Picturebtn\" was not injected: check your FXML file 'UI.fxml'.";
         assert MonoCoupTop != null : "fx:id=\"MonoCoupTop\" was not injected: check your FXML file 'UI.fxml'.";
-        assert Redo != null : "fx:id=\"Redo\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorAccumulator != null : "fx:id=\"EstimatorAccumulator\" was not injected: check your FXML file 'UI.fxml'.";
+        assert Save != null : "fx:id=\"Save\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorEnergySource != null : "fx:id=\"EstimatorEnergySource\" was not injected: check your FXML file 'UI.fxml'.";
         assert File != null : "fx:id=\"File\" was not injected: check your FXML file 'UI.fxml'.";
         assert InversionL != null : "fx:id=\"InversionL\" was not injected: check your FXML file 'UI.fxml'.";
@@ -460,6 +448,7 @@ public class Controller {
         assert EstimatorMultiCoupTop != null : "fx:id=\"EstimatorMultiCoupTop\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorMonoCoupBot != null : "fx:id=\"EstimatorMonoCoupBot\" was not injected: check your FXML file 'UI.fxml'.";
         assert EstimatorMonoCoupMid != null : "fx:id=\"EstimatorMonoCoupMid\" was not injected: check your FXML file 'UI.fxml'.";
+        assert Open != null : "fx:id=\"Open\" was not injected: check your FXML file 'UI.fxml'.";
         assert EditorTab != null : "fx:id=\"EditorTab\" was not injected: check your FXML file 'UI.fxml'.";
         assert Erasebtn != null : "fx:id=\"Erasebtn\" was not injected: check your FXML file 'UI.fxml'.";
         assert StatusBarL != null : "fx:id=\"StatusBarL\" was not injected: check your FXML file 'UI.fxml'.";

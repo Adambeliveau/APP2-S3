@@ -1,0 +1,5 @@
+cpt=6
+[519.2, 365.6, 146.39999999999998, 180.8, 262.4, 290.4]
+[197.6, 427.20000000000005, 240.8, 158.4, 104.0, 301.6]
+[ConversionInv, ConversionInv, ConversionInv, ArrowImg, ArrowImg, ArrowImg]
+
