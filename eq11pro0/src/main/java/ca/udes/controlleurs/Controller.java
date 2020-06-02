@@ -1,9 +1,10 @@
 package ca.udes.controlleurs;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.udes.model.ShapeFactory;
+import ca.udes.model.ShapeParent;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -370,26 +371,36 @@ public class Controller {
     
     private int cpt = 0;
     
+    private ShapeFactory shapeFactory = new ShapeFactory();
     @FXML
     void dragDropped(DragEvent event) {
+    	System.out.println(ConversionInv.toString());
+    	System.out.println(MultiConv.toString());
+    	System.out.println(MonoConv.toString());
+    	System.out.println(EnergySource.toString());
     	
-    	ObservableList<Double> polygonePoints = ConversionInv.getPoints();
-    	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
-    			polygonePoints.get(1).doubleValue(),
-    			polygonePoints.get(2).doubleValue(),
-    			polygonePoints.get(3).doubleValue(),
-    			polygonePoints.get(4).doubleValue(),
-    			polygonePoints.get(5).doubleValue(),
-    			polygonePoints.get(6).doubleValue(),
-    			polygonePoints.get(7).doubleValue()
-    			);
-    	newPoly.setFill(ConversionInv.getFill());
-    	newPoly.setStroke(ConversionInv.getStroke());
-    	newPoly.setLayoutX(event.getX());
-    	newPoly.setLayoutY(event.getY());
-    	newPoly.setId(Integer.toString(cpt++));
     	
-    	anchorPane.getChildren().add(newPoly);
+    	ShapeParent newShape = shapeFactory.getShape(ConversionInv.toString().substring(0,ConversionInv.toString().indexOf("["))
+    			, ConversionInv.toString());
+    	newShape.x(event.getX());
+    	newShape.y(event.getY());
+//    	ObservableList<Double> polygonePoints = ConversionInv.getPoints();
+//    	Polygon newPoly = new Polygon(polygonePoints.get(0).doubleValue(),
+//    			polygonePoints.get(1).doubleValue(),
+//    			polygonePoints.get(2).doubleValue(),
+//    			polygonePoints.get(3).doubleValue(),
+//    			polygonePoints.get(4).doubleValue(),
+//    			polygonePoints.get(5).doubleValue(),
+//    			polygonePoints.get(6).doubleValue(),
+//    			polygonePoints.get(7).doubleValue()
+//    			);
+//    	newPoly.setFill(ConversionInv.getFill());
+//    	newPoly.setStroke(ConversionInv.getStroke());
+//    	newPoly.setLayoutX(event.getX());
+//    	newPoly.setLayoutY(event.getY());
+//    	newPoly.setId(Integer.toString(cpt++));
+    	
+    	anchorPane.getChildren().add(newShape);
     	System.out.println(cptRedo);
     	System.out.println(cpt);
     }
