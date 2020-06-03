@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.udes.model.Command;
-import ca.udes.model.CommandControl;
+import ca.udes.model.OpenTxt;
+import ca.udes.model.OpenXml;
+import ca.udes.model.SaveTxt;
+import ca.udes.model.SaveXml;
 import ca.udes.model.ShapeFactory;
-//import ca.udes.model.ShapeParent;
-import javafx.collections.ObservableList;
+import ca.udes.model.Strategy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
@@ -254,32 +255,47 @@ public class Controller {
     	event.consume(); 
     }
     
-    private CommandControl cc = new CommandControl();
     protected List<Double> x = new ArrayList<Double>();
 	protected List<Double> y = new ArrayList<Double>();    
 	protected List<String> id = new ArrayList<String>();
+	private int cptDebut = 0;
+	private Strategy strats;
     
     @FXML
-    void SaveAction(ActionEvent event) throws IOException {
-
-    	cc.getCommand("Save", anchorPane, cpt, BorderPane, shFact, x, y, id);
+    void SavetxtAction(ActionEvent event) throws IOException {
+    	strats = new Strategy(cpt, cptDebut, x, y, id, BorderPane, shFact, anchorPane);
+		strats.SetSaveType(new SaveTxt());
+		strats.SaveExecute();
     }
     
     @FXML
-    void OpenAction(ActionEvent event) throws IOException {
-    	cc.getCommand("Open", anchorPane, cpt, BorderPane, shFact, x, y, id);
-    	anchorPane = cc.getAnchorPane();
-
+    void SaveXMLAction(ActionEvent event) throws IOException{
+    	strats = new Strategy(cpt, cptDebut, x, y, id, BorderPane, shFact, anchorPane);
+		strats.SetSaveType(new SaveXml());
+		strats.SaveExecute();
     }
     
     @FXML
-    void SaveS(KeyEvent event) throws IOException {
-    	if(event.getCode() == KeyCode.Z) {
-    		
-        	cc.getCommand("Undo", anchorPane, cpt, BorderPane, shFact, x, y, id);
-
+    void OpentxtAction(ActionEvent event) throws IOException {
+    	for(int i = 0 ; i < cpt ; i ++) {
+    		anchorPane.getChildren().remove(i);
+    		cpt--;
     	}
-
+    	strats = new Strategy(cpt, cptDebut, x, y, id, BorderPane, shFact, anchorPane);
+    	strats.SetOpenType(new OpenTxt());
+    	anchorPane = strats.OpenExecute();
+    	cpt = anchorPane.getChildren().size();
+    }
+    
+    @FXML
+    void OpenXMLAction(ActionEvent event) throws IOException {
+    	for(int i = 0 ; i < cpt ; i ++) {
+		anchorPane.getChildren().remove(i);
+		cpt--;
+    	}
+    	strats = new Strategy(cpt, cptDebut, x, y, id, BorderPane, shFact, anchorPane);
+    	strats.SetOpenType(new OpenXml());
+    	anchorPane = strats.OpenExecute();
     }
 
     @FXML

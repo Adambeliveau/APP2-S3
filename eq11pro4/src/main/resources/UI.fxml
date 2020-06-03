@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#SaveS" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.udes.controlleurs.Controller">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.udes.controlleurs.Controller">
    <top>
       <VBox prefHeight="705.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,8 +19,10 @@
                 <Menu fx:id="File" mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem fx:id="Save" mnemonicParsing="false" onAction="#SaveAction" text="Save" />
-                        <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#OpenAction" text="Open" />
+                        <MenuItem fx:id="Save" mnemonicParsing="false" onAction="#SavetxtAction" text="Save .txt" />
+                        <MenuItem mnemonicParsing="false" onAction="#SaveXMLAction" text="Save XML" />
+                        <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#OpentxtAction" text="Open txt" />
+                        <MenuItem mnemonicParsing="false" onAction="#OpenXMLAction" text="Open XML" />
                   </items>
                 </Menu>
                 <Menu fx:id="Edit" mnemonicParsing="false" text="Edit">
