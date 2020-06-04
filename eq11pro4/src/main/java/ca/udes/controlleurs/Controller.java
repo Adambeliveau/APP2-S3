@@ -1,6 +1,13 @@
+/*
+ * Fichier produit dans le cadre de lapp 2 - s3.
+ * Universite de sherbrooke
+ * Genie informatique
+ * Par Adam Béliveau et Joaquin Esteban Faundez-Flores
+ * BELA1003 - FAUJ3006
+ */
+
 package ca.udes.controlleurs;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
