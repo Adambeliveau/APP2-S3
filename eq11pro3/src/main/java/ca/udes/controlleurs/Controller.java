@@ -1,3 +1,11 @@
+/*
+ * Fichier produit dans le cadre de lapp 2 - s3.
+ * Universite de sherbrooke
+ * Genie informatique
+ * Par Adam Béliveau et Joaquin Esteban Faundez-Flores
+ * BELA1003 - FAUJ3006
+ */
+
 package ca.udes.controlleurs;
 
 import java.util.ArrayList;
@@ -6,7 +14,6 @@ import java.util.List;
 import ca.udes.model.Command;
 import ca.udes.model.CommandFactory;
 import ca.udes.model.ShapeFactory;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
