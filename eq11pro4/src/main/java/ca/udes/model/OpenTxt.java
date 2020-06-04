@@ -1,6 +1,7 @@
 package ca.udes.model;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -8,15 +9,20 @@ import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 
 public class OpenTxt implements Open{
 
 	public AnchorPane OpenTxtOrXml(int cpt, List<Double> x, List<Double> y,
 			List<String> id, BorderPane borderPane, ShapeFactory shFact,
 			AnchorPane anchorPane) {
+		FileChooser fileChooser = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files ", "*.txt");
+		fileChooser.getExtensionFilters().add(extFilter);
+		File file = fileChooser.showOpenDialog(null);
 		BufferedReader in = null;
 		try {
-			in = new BufferedReader(new FileReader("save.txt"));
+			in = new BufferedReader(new FileReader(file));
 			cpt += Integer.parseInt(in.readLine().substring(4));
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -70,7 +76,6 @@ public class OpenTxt implements Open{
 			}
 	    	
 	    	String nodeString = node.toString();
-	    	System.out.println(nodeString);
 	    	newNode = shFact.getShape(nodeString, x.get(i), y.get(i), id.get(i));
 	    	anchorPane.getChildren().add(newNode);
 		}
